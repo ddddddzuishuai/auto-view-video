@@ -23,7 +23,11 @@ denglu_link ="登录链接"
 username = "账号"
 password = "密码"
 
-2.使用里面的javascription复制到浏览器F12运行获取需要看视频的链接组（需要自己写）,获取到的链接填入py中的links = []中
+2.获取视频链接
+
+1.使用里面的javascription复制到浏览器F12运行获取需要看视频的链接组（需要自己写）,获取到的链接填入py中的links = []中
+
+2.链接填入all_class_link中，将自动获取
 
 3.配置播放按钮
 EC.element_to_be_clickable((By.CSS_SELECTOR, 'button.dplayer-icon.dplayer-play-icon'))
