@@ -1,5 +1,3 @@
-#user 20242310870708
-#pw   abc256912
 '''
 // Function to get all `a` links from `sh-res-h` divs, excluding those where img has title="已完成" and without (必看)
 function getFilteredLinks() {
@@ -46,22 +44,45 @@ options = Options()
 # options.add_argument("--profile-directory=Default")
 
 service = Service(edge_driver_path)
-driver = webdriver.Edge(service=service, options=options)
+driver = webdriver.Edge()
+
+#登录
+denglu_link = 'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html'
+
+driver.get(denglu_link)
+time.sleep(2)  # 等待页面加载
+
+username = "20242310870708"
+password = "abc256912"
+
+# 输入账号
+username_input = driver.find_element(By.ID, "username")
+username_input.send_keys(username)
+
+# 输入密码
+password_input = driver.find_element(By.ID, "password")
+password_input.send_keys(password)
+
+# 可选：勾选“7天免登录”
+# remember_me = driver.find_element(By.ID, "rememberMe")
+# if not remember_me.is_selected():
+#     remember_me.click()
+    
+    
+# 模拟点击登录按钮
+login_button = driver.find_element(By.ID, "login_submit")
+login_button.click()
+
+# 等待一段时间，确保登录成功
+time.sleep(5)
+
+# time.sleep(999999)
 
 # 链接数组
 links = [
- 'https://ids.shou.org.cn/authserver/login?service=https%3a%2f%2fl.shou.org.cn%2fcommon%2flogin.aspx%3fredirectUrl%3d%7e%2fcommon%2findex.aspx',
+ 'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html',
 
 
-
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=rx39amcxvlvkxxowwpd-qg",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=rx39amcxy7bnkgfsjr7fzg",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=r339amcxwilhatwr3kxqtw",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=on39amcxflpgpwtf9hq33g",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=qx39amcxokpa7uvb9i9-nq",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=o339amcxk6lhh-xgqvj0lw",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=p339amcx4lfn-c6sexvbbq",
-    "https://l.shou.org.cn/study/directory.aspx?CourseOpenId=oydxamcxeoleyv0vfu-ttw&minorcourseopenid=oydxamcxeoleyv0vfu-ttw&cellId=s339amcxro1comlsbxdy1q"
 
     # 添加更多链接
 ]
