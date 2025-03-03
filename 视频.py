@@ -51,6 +51,31 @@ options = Options()
 service = Service(edge_driver_path)
 driver = webdriver.Edge()
 
+
+
+def get_filtered_links(link):
+    driver.get(link)
+    time.sleep(2)
+    divs = driver.find_elements(By.CSS_SELECTOR, 'div.sh-res-h')
+    links = []
+    
+    for div in divs:
+        anchor = div.find_element(By.TAG_NAME, 'a') if div.find_elements(By.TAG_NAME, 'a') else None
+        img = div.find_element(By.TAG_NAME, 'img') if div.find_elements(By.TAG_NAME, 'img') else None
+        spans = div.find_elements(By.TAG_NAME, 'span')
+        
+        # Check if at least one span contains "(必看)"
+        has_must_watch = any(span.text.strip() == '(必看)' for span in spans)
+        
+        # Validate conditions before adding the link
+        if anchor and (not img or img.get_attribute('title') != '已完成') and has_must_watch:
+            links.append(anchor.get_attribute('href'))
+    
+    # print(links)
+    return links
+
+
+
 #登录
 # "https://ids.shou.org.cn/authserver/login",
 # 'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html'
@@ -81,14 +106,27 @@ login_button.click()
 # 等待一段时间，确保登录成功
 time.sleep(5)
 
-time.sleep(999999)
+
 
 # 链接数组
-links = [
- 'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html',
 
-    # 添加更多链接
-]
+## 输入链接自动查询所有的链接
+all_class_link = ['file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test2.html']
+links=[]
+for link in all_class_link:
+    links.extend(get_filtered_links(link))
+
+if not links:
+    print("已经完成，或者没有读取到数据")
+    exit()
+
+print(links)
+## 手动输入链接，数据使用最上的java获取
+# links = [
+#  'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html',
+
+#     # 添加更多链接
+# ]
 
 
 # 遍历链接数组并每隔10分钟打开一个链接
