@@ -35,6 +35,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+
+username = "20242310870708"
+password = "abc256912"
+
+
 # Edge WebDriver路径
 edge_driver_path = './edge/msedgedriver.exe'  # 替换为msedgedriver的实际路径
 options = Options()
@@ -47,13 +52,13 @@ service = Service(edge_driver_path)
 driver = webdriver.Edge()
 
 #登录
-denglu_link = 'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html'
+# "https://ids.shou.org.cn/authserver/login",
+# 'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html'
+denglu_link = "https://ids.shou.org.cn/authserver/login"
 
 driver.get(denglu_link)
 time.sleep(2)  # 等待页面加载
 
-username = "20242310870708"
-password = "abc256912"
 
 # 输入账号
 username_input = driver.find_element(By.ID, "username")
@@ -76,13 +81,11 @@ login_button.click()
 # 等待一段时间，确保登录成功
 time.sleep(5)
 
-# time.sleep(999999)
+time.sleep(999999)
 
 # 链接数组
 links = [
  'file:///C:/Users/001/Desktop/py/%E6%9D%82%E9%A1%B9/%E8%87%AA%E5%8A%A8%E7%9C%8B%E8%A7%86%E9%A2%91/test.html',
-
-
 
     # 添加更多链接
 ]
