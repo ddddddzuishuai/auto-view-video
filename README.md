@@ -18,6 +18,8 @@ https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver
 
 1.打开py,配置账号密码
 
+denglu_link ="登录链接"
+
 username = "账号"
 password = "密码"
 
